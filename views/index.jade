@@ -2,4 +2,11 @@ extends layout
 
 block content
   h1= title
+  input
   p Welcome to #{title}
+  script(src="/javascripts/demo.js")
+  ui-select(multiple, tagging, tagging-label="false",ng-model="multipleDemo.colors2",theme="bootstrap",style="width: 300px;")
+    ui-select-match(placeholder="Select colors..."){{$item}}
+    ui-select-choices(repeat="color in availableColors | filter:$select.search")
+        {{color}}
+    Selected: {{multipleDemo.colors2}}

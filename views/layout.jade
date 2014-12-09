@@ -1,7 +1,24 @@
 doctype html
-html
+html(ng-app="demo")
   head
+    script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js")
+    script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-sanitize.js")
+    script(src="/bower_components/angular-ui-select/dist/select.js")
+    link(rel="stylesheet", href="/bower_components/angular-ui-select/dist/select.min.css")
+    link(rel="stylesheet",href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css")
+    link(rel="stylesheet",href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css")
+    link(rel="stylesheet", href="httpksdfs://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css")
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    //link(rel='stylesheet', href='/stylesheets/style.css')
+  body(ng-controller="DemoCtrl")
+    script(src="/javascripts/demo.js")
+    input(placeholder="description")
+    ui-select(multiple, tagging, tagging-label="false",ng-model="multipleDemo.colors2",theme="bootstrap",style="width: 300px;")
+      ui-select-match(placeholder="Select colors..."){{$item}}
+      ui-select-choices(repeat="color in availableColors | filter:$select.search")
+          {{color}}
+    p
+      Selected: {{multipleDemo.colors2}}
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")

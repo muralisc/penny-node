@@ -1,0 +1,22 @@
+{
+  "name": "fileup",
+  "version": "0.0.0",
+  "authors": [
+    "Murali S <muralisc@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-select": "~0.9.3"
+  }
+}
