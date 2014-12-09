@@ -13,22 +13,25 @@ html(ng-app="demo")
     //link(rel='stylesheet', href='/stylesheets/style.css')
   body(ng-controller="DemoCtrl")
     script(src="/javascripts/demo.js")
-    ui-select(multiple, tagging, tagging-label="false",ng-model="multipleDemo.colors2",theme="bootstrap",style="width: 320px;")
-      ui-select-match(placeholder="Select colors..."){{$item}}
-      ui-select-choices(repeat="color in availableColors | filter:$select.search")
-          {{color}}
-    input(placeholder="amount",style="width:320px;")
-    br
-    input(placeholder="description",style="width:320px;")
-    ui-select(multiple, tagging, tagging-label="false",ng-model="multipleDemo.colors2",theme="bootstrap",style="width: 320px;")
-      ui-select-match(placeholder="Select colors..."){{$item}}
-      ui-select-choices(repeat="color in availableColors | filter:$select.search")
-          {{color}}
-    p
-      Selected: {{multipleDemo.colors2}}
-    p Selected date is: {{dt | date:'fullDate' }}
-    div(style="display:inline-block;")
-      datepicker(ng-model="dt",show-weeks="true",class="well well-sm")
+    form(action="/categories", method="post",style="width:320px;")
+        ui-select(multiple, tagging, tagging-label="false",ng-model="multipleDemo.colors2",theme="bootstrap",style="width: 320px;")
+            ui-select-match(placeholder="Select colors..."){{$item}}
+            ui-select-choices(repeat="color in availableColors | filter:$select.search")
+                {{color}}
+        input(placeholder="amount",style="width:320px;")
+        br
+        input(placeholder="description",style="width:320px;")
+        ui-select(multiple, tagging, tagging-label="false",ng-model="multipleDemo.colors2",theme="bootstrap",style="width: 320px;")
+            ui-select-match(placeholder="Select colors..."){{$item}}
+            ui-select-choices(repeat="color in availableColors | filter:$select.search")
+                {{color}}
+        p
+        Selected: {{multipleDemo.colors2}}
+        p Selected date is: {{dt | date:'fullDate' }}
+        div(style="display:inline-block;")
+        datepicker(ng-model="dt",show-weeks="true",class="well well-sm")
+        div
+            button.btn.btn-primary.btn-block(type="submit") Submit
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js")

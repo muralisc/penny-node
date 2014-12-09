@@ -10,4 +10,8 @@ router.get('/categories', function(req, res) {
   res.json({ title: ['Express'] });
 });
 
+router.post('/categories', function(req, res) {
+  res.json({ title: ['post recieved'] });
+});
+
 module.exports = router;
