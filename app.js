@@ -12,6 +12,7 @@ var users = require('./routes/users');
 var maintenance = require('./routes/maintenance');
 
 var app = express();
+app.locals.pretty=true;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
