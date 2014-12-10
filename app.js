@@ -11,6 +11,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var maintenance = require('./routes/maintenance');
 var jsonSet = require('./routes/jsonSet');
+var jsonGet = require('./routes/jsonGet');
 
 var app = express();
 app.locals.pretty=true;
@@ -35,6 +36,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use("/maintenance", maintenance);
 app.use("/set", jsonSet);
+app.use("/get", jsonGet);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

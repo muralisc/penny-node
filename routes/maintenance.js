@@ -6,6 +6,7 @@ var fs = require("fs");
 var mongoskin = require('mongoskin');
 var path = require('path');
 var async = require('async');
+var dbhelper = require('./dbhelper.js');
 
 
 var db = mongoskin.db('mongodb://localhost:27017/penny');
@@ -91,17 +92,15 @@ function populateDbFromCsv(filepath){
     categories = {};
     csvparse(data,function(err, output){
       output.forEach(function(line){
-        db.collection('transactions').insert( {
-          email:        line[0],
+        // helper function to insert he database
+        dbhelper.setTransaction({
+          // email:        line[0],
+          fromCategory: [ line[2] ],
           amount:       parseFloat(line[1]),
-          fromCategory: line[2],
           description:  line[3],
-          toCategory:   line[4],
-          time:         new Date(line[5])
-        }, function(err, result) {
-          if (err) throw err;
+          toCategory:   [ line[4] ],
+          date:         new Date(line[5])
         });
-        // console.log( line[2]+" " + util.inspect(fc));
       });
     });
   });
