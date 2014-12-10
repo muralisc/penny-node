@@ -14,24 +14,25 @@ html(ng-app="demo")
   body(ng-controller="DemoCtrl")
     script(src="/javascripts/demo.js")
     form(action="/categories", method="post",style="width:320px;")
-        ui-select(multiple, tagging, tagging-label="false",ng-model="multipleDemo.colors2",theme="bootstrap",style="width: 320px;")
+        ui-select(multiple, tagging, tagging-label="false",ng-model="transcation.fromCategory",theme="bootstrap",style="width: 320px;")
             ui-select-match(placeholder="Select colors..."){{$item}}
-            ui-select-choices(repeat="color in availableColors | filter:$select.search")
+            ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
                 {{color}}
-        input(placeholder="amount",style="width:320px;")
-        br
-        input(placeholder="description",style="width:320px;")
-        ui-select(multiple, tagging, tagging-label="false",ng-model="multipleDemo.colors2",theme="bootstrap",style="width: 320px;")
+        input(placeholder="amount",type="number",ng-model="transcation.amount",typeahead="state for state in availableAmounts | filter:$viewValue | limitTo:8",class="form-control")
+        input(placeholder="description",type="text",ng-model="transcation.description",typeahead="state for state in availableDescriptions | filter:$viewValue | limitTo:8",class="form-control")
+        ui-select(multiple, tagging, tagging-label="false",ng-model="transcation.toCategory",theme="bootstrap",style="width: 320px;")
             ui-select-match(placeholder="Select colors..."){{$item}}
-            ui-select-choices(repeat="color in availableColors | filter:$select.search")
+            ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
                 {{color}}
         p
-        Selected: {{multipleDemo.colors2}}
-        p Selected date is: {{dt | date:'fullDate' }}
-        div(style="display:inline-block;")
         datepicker(ng-model="dt",show-weeks="true",class="well well-sm")
         div
             button.btn.btn-primary.btn-block(type="submit") Submit
+        p Selected: {{transcation.fromCategory}}
+        p Selected: {{transcation.amount}}
+        p Selected: {{transcation.description}}
+        p Selected: {{transcation.toCategory}}
+        p Selected date is: {{dt | date:'fullDate' }}
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js")
