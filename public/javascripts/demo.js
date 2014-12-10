@@ -11,7 +11,8 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   $scope.transcation.date = new Date();
 
   $scope.onSubmit = function(){
-    var responsePromise = $http.post("/categories", $scope.transcation);
+    var responsePromise = $http.post("/set/transaction", $scope.transcation);
+    console.log("asdfA");
   };
 
   var responsePromise = $http.get("/categories");

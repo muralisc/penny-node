@@ -10,6 +10,7 @@ var multer = require('multer');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var maintenance = require('./routes/maintenance');
+var jsonSet = require('./routes/jsonSet');
 
 var app = express();
 app.locals.pretty=true;
@@ -33,6 +34,7 @@ app.use('/bower_components',express.static(path.join(__dirname, 'bower_component
 app.use('/', routes);
 app.use('/users', users);
 app.use("/maintenance", maintenance);
+app.use("/set", jsonSet);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

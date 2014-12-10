@@ -28,7 +28,7 @@ html(ng-app="demo")
         p
         datepicker(ng-model="transcation.date",show-weeks="true",class="well well-sm")
         div
-            button.btn.btn-primary.btn-block(type="submit") Submit
+            button.btn.btn-primary.btn-block(type="submit", ng-click="onSubmit()") Submit
         p from: {{transcation.fromCategory}}
         p amount: {{transcation.amount}}
         p description: {{transcation.description}}
