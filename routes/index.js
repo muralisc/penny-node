@@ -11,7 +11,7 @@ router.get('/categories', function(req, res) {
 });
 
 router.post('/categories', function(req, res) {
-  res.json({ title: ['post recieved'] });
+  res.json(req.body);
 });
 
 module.exports = router;

@@ -13,7 +13,8 @@ html(ng-app="demo")
     //link(rel='stylesheet', href='/stylesheets/style.css')
   body(ng-controller="DemoCtrl")
     script(src="/javascripts/demo.js")
-    form(action="/categories", method="post",style="width:320px;")
+    //form(action="/categories", method="post",style="width:320px;",ng-submit="onSubmit()")
+    div(style="width:320px;")
         ui-select(multiple, tagging, tagging-label="false",ng-model="transcation.fromCategory",theme="bootstrap",style="width: 320px;")
             ui-select-match(placeholder="Select colors..."){{$item}}
             ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
@@ -25,14 +26,14 @@ html(ng-app="demo")
             ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
                 {{color}}
         p
-        datepicker(ng-model="dt",show-weeks="true",class="well well-sm")
+        datepicker(ng-model="transcation.date",show-weeks="true",class="well well-sm")
         div
             button.btn.btn-primary.btn-block(type="submit") Submit
-        p Selected: {{transcation.fromCategory}}
-        p Selected: {{transcation.amount}}
-        p Selected: {{transcation.description}}
-        p Selected: {{transcation.toCategory}}
-        p Selected date is: {{dt | date:'fullDate' }}
+        p from: {{transcation.fromCategory}}
+        p amount: {{transcation.amount}}
+        p description: {{transcation.description}}
+        p to: {{transcation.toCategory}}
+        p date is: {{ transcation.date | date:'fullDate' }}
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js")

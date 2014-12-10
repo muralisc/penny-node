@@ -8,6 +8,11 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
 
   $scope.transcation = {};
   $scope.transcation.description = "asd";
+  $scope.transcation.date = new Date();
+
+  $scope.onSubmit = function(){
+    var responsePromise = $http.post("/categories", $scope.transcation);
+  };
 
   var responsePromise = $http.get("/categories");
 
