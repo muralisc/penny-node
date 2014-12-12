@@ -20,12 +20,12 @@ router.get("/seedb", function(req, res) {
   db.collection('transactions').find().toArray(function(err, result) {
     if (err) throw err;
     result.forEach( function(line){
-      retString += line.email + ",";
+      // retString += line.email + ",";
       retString += line.amount + ",";
       retString += line.fromCategory + ",";
       retString += line.description + ",";
       retString += line.toCategory + ",";
-      retString += line.time +"\n";
+      retString += line.date +"\n";
     });
     fs.unlink('message.txt');
     fs.appendFile('message.txt', retString, function (err) {
