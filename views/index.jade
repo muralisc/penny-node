@@ -1,7 +1,6 @@
 extends layout
 
 block content
-    h1= title
     script(src="/javascripts/index.js")
     //form(action="/categories", method="post",style="width:320px;",ng-submit="onSubmit()")
     div(style="width:320px;")
@@ -15,7 +14,6 @@ block content
             ui-select-match(placeholder="Select colors..."){{$item}}
             ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
                 {{color}}
-        p
         datepicker(ng-model="transcation.date",show-weeks="true",class="well well-sm")
         div
             button.btn.btn-primary.btn-block(type="submit", ng-click="onSubmit()") Submit

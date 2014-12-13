@@ -126,4 +126,12 @@ router.get('/expenses', function(req, res) {
   });
 });
 
+
+router.post('/transactions', function(req, res) {
+  console.log(req.body);
+  db.collection('transactions').find(req.body.query).limit(5).toArray(function(err, result){
+    res.json(result);
+  });
+});
+
 module.exports = router;
