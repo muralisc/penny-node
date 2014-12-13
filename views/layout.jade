@@ -12,29 +12,7 @@ html(ng-app="demo")
     title= title
     //link(rel='stylesheet', href='/stylesheets/style.css')
   body(ng-controller="DemoCtrl")
-    script(src="/javascripts/demo.js")
-    //form(action="/categories", method="post",style="width:320px;",ng-submit="onSubmit()")
-    div(style="width:320px;")
-        ui-select(multiple, tagging, tagging-label="false",ng-model="transcation.fromCategory",theme="bootstrap",style="width: 320px;")
-            ui-select-match(placeholder="Select colors..."){{$item}}
-            ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
-                {{color}}
-        input(placeholder="amount",type="number",ng-model="transcation.amount",typeahead="state for state in availableAmounts | filter:$viewValue | limitTo:8",class="form-control")
-        input(placeholder="description",type="text",ng-model="transcation.description",typeahead="state for state in availableDescriptions | filter:$viewValue | limitTo:8",class="form-control")
-        ui-select(multiple, tagging, tagging-label="false",ng-model="transcation.toCategory",theme="bootstrap",style="width: 320px;")
-            ui-select-match(placeholder="Select colors..."){{$item}}
-            ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
-                {{color}}
-        p
-        datepicker(ng-model="transcation.date",show-weeks="true",class="well well-sm")
-        div
-            button.btn.btn-primary.btn-block(type="submit", ng-click="onSubmit()") Submit
-        p from: {{transcation.fromCategory}}
-        p amount: {{transcation.amount}}
-        p description: {{transcation.description}}
-        p to: {{transcation.toCategory}}
-        p date is: {{ transcation.date | date:'fullDate' }}
+    block content
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js")
-    block content

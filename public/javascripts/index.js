@@ -15,11 +15,10 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
     console.log("asdfA");
   };
 
-  var responsePromise = $http.get("/categories");
+  var responsePromise = $http.get("/get/categories");
 
   responsePromise.success(function(data, status, headers, config) {
-    console.log(data['title']);
-    $scope.avaibaleCategories = data['title'];
+    $scope.avaibaleCategories = data;
   });
 
 });
