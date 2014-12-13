@@ -35,40 +35,6 @@ router.get("/seedb", function(req, res) {
   });
 });
 
-router.get("/aggregate", function(req, res) {
-  net = {}
-  db.collection('transactions').aggregate([{
-    $group:{
-      _id: "$fromCategory",
-      count: { $sum : "$amount" }
-    }
-  }], function(err, from) {
-    if (err) throw err;
-    db.collection('transactions').aggregate([{
-      $group:{
-        _id: "$toCategory",
-        count: { $sum : "$amount" }
-      }
-    }], function( err, to){
-      if (err) throw err;
-      to_1 = {};
-      from_1 = {}
-      to.forEach(function(item){
-        to_1[item._id] = item.count;
-      });
-      from.forEach(function(item){
-        from_1[item._id] = item.count;
-      });
-      send = []
-      for( var prop in to_1){
-        if( prop.indexOf("bank") > -1)
-          send.push( prop + "\t"+(to_1[prop] - from_1[prop]) );
-      }
-      res.render("uploadPage1", {result: send});
-    });
-  });
-});
-
 router.post("/upload", function(req, res, next){
   if (req.files) {
     // console.log(util.inspect(req.files));
