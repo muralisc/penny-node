@@ -9,7 +9,7 @@ block content
                 input(type="number",placeholder="large num",class="form-control",ng-model="postData.query.amount.$lte",ng-change="getTransactions()")
                 input(type="text",placeholder="description Search regex",class="form-control",ng-model="postData.query.description",ng-change="getTransactions()")
                 p.input-group
-                    input(type="text",class="form-control",datepicker-popup="dd-MMMM-yyyy",ng-model="postData.query.date",is-open="opened",datepicker-options="dateOptions",date-disabled="disabled(date, mode)",ng-required="true",ng-change="getTransactions()")
+                    input(type="text",class="form-control",datepicker-popup="dd-MMMM-yyyy",ng-model="postData.query.date.$gte",is-open="opened",datepicker-options="dateOptions",date-disabled="disabled(date, mode)",ng-required="true",ng-change="getTransactions()")
                     span.input-group-btn
                         button(type="button",class="btn btn-default",ng-click="open($event)")
                             i.glyphicon.glyphicon-calendar

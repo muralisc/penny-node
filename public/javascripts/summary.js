@@ -5,7 +5,9 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   $scope.postData = {};
   $scope.postData.query ={};
   $scope.postData.query.amount ={};
+  $scope.postData.query.amount.$gte =0;
   $scope.postData.query.description = "";
+  $scope.postData.query.date = {};
   $scope.postData.skip ={};
   $scope.postData.limit ={};
 
