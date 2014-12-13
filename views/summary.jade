@@ -5,7 +5,9 @@ block content
     div.container-fluid
         div.row
             div.col-md-6
-                input(type="number",class="form-control",ng-model="postData.query.amount",ng-change="getTransactions()")
+                input(type="number",placeholder="small num",class="form-control",ng-model="postData.query.amount.$gte",ng-change="getTransactions()")
+                input(type="number",placeholder="large num",class="form-control",ng-model="postData.query.amount.$lte",ng-change="getTransactions()")
+                input(type="text",placeholder="description Search regex",class="form-control",ng-model="postData.query.description",ng-change="getTransactions()")
                 p.input-group
                     input(type="text",class="form-control",datepicker-popup="dd-MMMM-yyyy",ng-model="postData.query.date",is-open="opened",datepicker-options="dateOptions",date-disabled="disabled(date, mode)",ng-required="true",ng-change="getTransactions()")
                     span.input-group-btn
