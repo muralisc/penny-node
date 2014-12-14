@@ -4,15 +4,27 @@ block content
     script(src="/javascripts/summary.js")
     div.container-fluid
         div.row
+            div.col-md-2
+                table.table.table-striped
+                    tr(ng-repeat="(category,balance) in balances")
+                        td {{category}}
+                        td.text-right {{balance | number:2}}
+        div.row
             div.col-md-6
-                input(type="number",placeholder="small num",class="form-control",ng-model="postData.query.amount.$gte",ng-change="getTransactions()")
-                input(type="number",placeholder="large num",class="form-control",ng-model="postData.query.amount.$lte",ng-change="getTransactions()")
-                input(type="text",placeholder="description Search regex",class="form-control",ng-model="postData.query.description",ng-change="getTransactions()")
+                input(type="number",placeholder="amount lower limit",class="form-control",ng-model="txnGetPostData.query.amount.$gte",ng-change="getTransactions()")
+                input(type="number",placeholder="amount upper limit",class="form-control",ng-model="txnGetPostData.query.amount.$lte",ng-change="getTransactions()")
+                input(type="text",placeholder="description Search regex",class="form-control",ng-model="txnGetPostData.query.description",ng-change="getTransactions()")
                 p.input-group
-                    input(type="text",class="form-control",datepicker-popup="dd-MMMM-yyyy",ng-model="postData.query.date.$gte",is-open="opened",datepicker-options="dateOptions",date-disabled="disabled(date, mode)",ng-required="true",ng-change="getTransactions()")
+                    input(type="text",placeholder="date lower lim",class="form-control",datepicker-popup="dd-MMMM-yyyy",ng-model="txnGetPostData.query.date.$gte",is-open="openedLowerDate",ng-required="true",ng-change="getTransactions()")
                     span.input-group-btn
-                        button(type="button",class="btn btn-default",ng-click="open($event)")
+                        button(type="button",class="btn btn-default",ng-click="openLowerDate($event)")
                             i.glyphicon.glyphicon-calendar
+                p.input-group
+                    input(type="text",placeholder="date lower lim",class="form-control",datepicker-popup="dd-MMMM-yyyy",ng-model="txnGetPostData.query.date.$lte",is-open="openedUpperDate",ng-required="true",ng-change="getTransactions()")
+                    span.input-group-btn
+                        button(type="button",class="btn btn-default",ng-click="openUpperDate($event)")
+                            i.glyphicon.glyphicon-calendar
+                input(type="number",placeholder="txn per page",class="form-control",ng-model="txnGetPostData.limit",ng-change="getTransactions()")
                 table.table.table-striped
                     tr(ng-repeat="txn in txnData")
                         td {{txn._id}}
@@ -21,3 +33,5 @@ block content
                         td {{txn.description}}
                         td {{txn.toCategory}}
                         td {{txn.date}}
+                        td
+                            input(type="checkbox",ng-model="txn.checked",ng-click="onCheck($event)",value="{{txn._id}}")

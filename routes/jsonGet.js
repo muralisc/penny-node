@@ -130,8 +130,9 @@ router.get('/expenses', function(req, res) {
 router.post('/transactions', function(req, res) {
   req.body.query.description = new RegExp(req.body.query.description);
   req.body.query.date.$gte = new Date(req.body.query.date.$gte);
+  req.body.query.date.$lte = new Date(req.body.query.date.$lte);
   console.log(req.body);
-  db.collection('transactions').find(req.body.query).limit(5).toArray(function(err, result){
+  db.collection('transactions').find(req.body.query).limit(req.body.limit).toArray(function(err, result){
     res.json(result);
   });
 });
