@@ -128,9 +128,26 @@ router.get('/expenses', function(req, res) {
 
 
 router.post('/transactions', function(req, res) {
+  console.log(req.body.query);
+  req.body.query.fromCategory = new RegExp(req.body.query.fromCategory);
+  req.body.query.toCategory = new RegExp(req.body.query.toCategory);
   req.body.query.description = new RegExp(req.body.query.description);
-  req.body.query.date.$gte = new Date(req.body.query.date.$gte);
-  req.body.query.date.$lte = new Date(req.body.query.date.$lte);
+  if(Object.keys(req.body.query.date).length >0)
+  {
+    if(req.body.query.date.$gte != undefined)
+      req.body.query.date.$gte = new Date(req.body.query.date.$gte);
+    else
+      req.body.query.date.$gte = new Date(0);
+    if(req.body.query.date.$lte != undefined)
+      req.body.query.date.$lte = new Date(req.body.query.date.$lte);
+    else
+      req.body.query.date.$lte = new Date();
+  }
+  else
+  {
+    delete req.body.query.date;
+  }
+  console.log(req.body.query);
   db.collection('transactions').find(req.body.query).limit(req.body.limit).toArray(function(err, result){
     res.json(result);
   });
