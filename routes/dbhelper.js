@@ -20,7 +20,7 @@ helper.setTransaction = function(data){
     amount:       data.amount,
     description:  data.description,
     toCategory:   data.toCategory[0],
-    date:         data.date
+    date:         new Date(data.date)
   }, function(err, result) {
     if (err) throw err;
     console.log("db entry added:");

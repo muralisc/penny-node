@@ -13,7 +13,10 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   $scope.openedLowerDate = false;
   $scope.openedUpperDate = false;
   $scope.txnData; // populated in the responsePromise below
+  $scope.txnEditPostData = {};
+  $scope.txnEditPostData.ids = {};
   var txnResponsePromise;
+  $scope.avaibaleCategories = ['loading...','loading...'];
 
 
   // Functions ------------------ Begin
@@ -33,6 +36,15 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   };
 
   $scope.onCheck = function($event){
+    if($scope.txnEditPostData.ids.hasOwnProperty($event.currentTarget.getAttribute("value")))
+    {
+      delete $scope.txnEditPostData.ids[ $event.currentTarget.getAttribute("value") ];
+    }
+    else
+    {
+      $scope.txnEditPostData.ids[ $event.currentTarget.getAttribute("value") ] = true;
+    }
+    console.log($scope.txnEditPostData.ids);
     console.log($event.currentTarget.getAttribute("value"));
   };
 

@@ -2,7 +2,7 @@ var app = angular.module('demo', ['ui.bootstrap', 'ui.select']);
 
 app.controller('DemoCtrl', function($scope, $http, $timeout) {
 
-  $scope.avaibaleCategories = ['Red','Green','Blue','Yellow','Magenta','Maroon','Umbra','Turquoise'];
+  $scope.avaibaleCategories = ['loading...','loading...'];
   $scope.availableDescriptions = ['asd','wer','atds'];
   $scope.availableAmounts = [2,4,234,2345];
 
