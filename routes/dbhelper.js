@@ -63,5 +63,16 @@ helper.getToCategories = function(callback){
   });
 }
 
+// used with async.map
+helper.updateTxns = function(item,callback){
+  db.collection('transactions').updateById(item,{
+      $set: {
+        fromCategory: this.fromCategory[0],
+      },
+    }, function(err, result){
+      if (err) throw err;
+      callback(err,result);
+  });
+}
 
 module.exports = helper;

@@ -65,7 +65,7 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   $scope.onEditClick = function(){
     $scope.txnEditPostData.ids = Object.keys(idsObject);
     console.log(JSON.stringify($scope.txnEditPostData));
-    txnResponsePromise = $http.post("/set/updateTxn", $scope.txnEditPostData);
+    txnResponsePromise = $http.post("/set/updateTxns", $scope.txnEditPostData);
     txnResponsePromise.success(function(data, status, headers, config) {
       console.log(data);
       $scope.getTransactions();
