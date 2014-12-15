@@ -19,6 +19,19 @@ router.post("/transaction",function(req,res, next){
   dbhelper.setTransaction(req.body);
 });
 
+
+router.post("/updateTxn",function(req,res, next){
+  console.log(req.body.update.fromCategory[0]);
+  db.collection('transactions').updateById(req.body.ids[0],{
+      $set: {
+        fromCategory: req.body.update.fromCategory[0],
+      },
+    }, function(err, result){
+      if (err) throw err;
+      res.json(result);
+  });
+});
+
 router.get('/', function(req, res) {
   res.json({ title: ['Express'] });
 });

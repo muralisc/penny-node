@@ -14,9 +14,11 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   $scope.openedUpperDate = false;
   $scope.txnData; // populated in the responsePromise below
   $scope.txnEditPostData = {};
-  $scope.txnEditPostData.ids = {};
+  var idsObject = {};
+  $scope.txnEditPostData.ids = [];
+  $scope.txnEditPostData.update = {};
   var txnResponsePromise;
-  $scope.avaibaleCategories = ['loading...','loading...'];
+  $scope.avaibaleCategories = ['loading...','...'];
 
 
   // Functions ------------------ Begin
@@ -36,15 +38,15 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   };
 
   $scope.onCheck = function($event){
-    if($scope.txnEditPostData.ids.hasOwnProperty($event.currentTarget.getAttribute("value")))
+    if(idsObject.hasOwnProperty($event.currentTarget.getAttribute("value")))
     {
-      delete $scope.txnEditPostData.ids[ $event.currentTarget.getAttribute("value") ];
+      delete idsObject[ $event.currentTarget.getAttribute("value") ];
     }
     else
     {
-      $scope.txnEditPostData.ids[ $event.currentTarget.getAttribute("value") ] = true;
+      idsObject[ $event.currentTarget.getAttribute("value") ] = true;
     }
-    console.log($scope.txnEditPostData.ids);
+    console.log(idsObject);
     console.log($event.currentTarget.getAttribute("value"));
   };
 
@@ -59,6 +61,15 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
     $event.stopPropagation();
 
     $scope.openedUpperDate = !$scope.openedUpperDate;
+  };
+  $scope.onEditClick = function(){
+    $scope.txnEditPostData.ids = Object.keys(idsObject);
+    console.log(JSON.stringify($scope.txnEditPostData));
+    txnResponsePromise = $http.post("/set/updateTxn", $scope.txnEditPostData);
+    txnResponsePromise.success(function(data, status, headers, config) {
+      console.log(data);
+      $scope.getTransactions();
+    });
   };
   // Functions ------------------ End
 

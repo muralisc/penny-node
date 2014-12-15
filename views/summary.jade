@@ -35,3 +35,12 @@ block content
                         td {{txn.date}}
                         td
                             input(type="checkbox",ng-model="txn.checked",ng-click="onCheck($event)",value="{{txn._id}}")
+        div.row
+            div.col-md-6
+                p batch edit:
+                ui-select(multiple, tagging, tagging-label="false",ng-model="txnEditPostData.update.fromCategory",theme="bootstrap")
+                    ui-select-match(placeholder="new to category"){{$item}}
+                    ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
+                        {{color}}
+                div
+                    button.btn.btn-primary.btn-block(type="submit", ng-click="onEditClick()") Edit
