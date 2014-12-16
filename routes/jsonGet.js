@@ -8,7 +8,7 @@ var merge = require('merge');
 
 router.get('/categories', function(req, res) {
   async.parallel([
-    dbhelper.getFromCategories,
+    dbhelper.getFromCategories.bind(req),
     // comma above because this is an array
   ],
   function(err, results){
@@ -55,7 +55,7 @@ router.get('/balances', function(req, res) {
         }] , callback             // will be called as callback(err, result)
       );
     },
-    fromCategories: dbhelper.getFromCategories,
+    fromCategories: dbhelper.getFromCategories.bind(req),
   }, 
   function(err, results){
     // now convert the results to consumable form
@@ -100,7 +100,7 @@ router.get('/expenses', function(req, res) {
         }] , callback             // will be called as callback(err, result)
       );
     },
-    toCategories: dbhelper.getToCategories,
+    toCategories: dbhelper.getToCategories.bind(req),
   }, 
   function(err, results){
     // now convert the results to consumable form

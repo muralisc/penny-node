@@ -14,7 +14,7 @@ var helper = {};
  * date: ,
  * }
  */
-helper.setTransaction = function(data){
+helper.setTransaction = function(data,db){
   db.collection('transactions').insert( {
     fromCategory: data.fromCategory[0],
     amount:       data.amount,
@@ -52,13 +52,13 @@ helper.aggregateArrayToObject = function(array, callback){
 }
 
 helper.getFromCategories = function(callback){
-  db.collection('transactions').distinct('fromCategory', function(err, result){
+  this.db.collection('transactions').distinct('fromCategory', function(err, result){
     callback(err, result);
   });
 }
 
 helper.getToCategories = function(callback){
-  db.collection('transactions').distinct('toCategory', function(err, result){
+  this.db.collection('transactions').distinct('toCategory', function(err, result){
     callback(err, result);
   });
 }
@@ -66,14 +66,14 @@ helper.getToCategories = function(callback){
 // used with async.map
 helper.updateTxns = function(item,callback){
   var updateObj = { $set: {} };
-  if( this.fromCategory.length > 0)
-    updateObj.$set['fromCategory'] = this.fromCategory[0];
-  if( this.toCategory.length > 0)
-    updateObj.$set['toCategory'] = this.toCategory[0];
-  if( this.description != undefined)
-    updateObj.$set['description'] = this.description;
+  if( this.body.update.fromCategory.length > 0)
+    updateObj.$set['fromCategory'] = this.body.update.fromCategory[0];
+  if( this.body.update.toCategory.length > 0)
+    updateObj.$set['toCategory'] = this.body.update.toCategory[0];
+  if( this.body.update.description != undefined)
+    updateObj.$set['description'] = this.body.update.description;
   // console.log(JSON.stringify(this));
-  db.collection('transactions').updateById(item,updateObj, function(err, result){
+  this.db.collection('transactions').updateById(item,updateObj, function(err, result){
       if (err) throw err;
       callback(err,result);
   });

@@ -15,12 +15,12 @@ var dbhelper = require('./dbhelper.js');
  * }
  */
 router.post("/transaction",function(req,res, next){
-  dbhelper.setTransaction(req.body);
+  dbhelper.setTransaction(req.body,req.db);
 });
 
 
 router.post("/updateTxns",function(req,res, next){
-  async.map(req.body.ids, dbhelper.updateTxns.bind(req.body.update), function(err, results){
+  async.map(req.body.ids, dbhelper.updateTxns.bind(req), function(err, results){
     res.json(results);
   });
 });
