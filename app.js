@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var mongoskin = require('mongoskin');
+var db = mongoskin.db('mongodb://localhost:27017/penny');
 
 
 var routes = require('./routes/index');
@@ -29,6 +31,10 @@ app.use(multer({
           dest: "./uploads/"
 }));
 app.use(cookieParser());
+app.use(function(req,res,next){
+  req.db = db;
+  next();
+});
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components',express.static(path.join(__dirname, 'bower_components')));
 

@@ -3,13 +3,11 @@ var csvparse = require('csv-parse');
 var router = express.Router();
 var util = require("util");
 var fs = require("fs");
-var mongoskin = require('mongoskin');
 var path = require('path');
 var async = require('async');
 var dbhelper = require('./dbhelper.js');
 
 
-var db = mongoskin.db('mongodb://localhost:27017/penny');
 
 router.get('/upload', function(req, res) {
   res.render("uploadPage", {title: "I love files!"});
@@ -17,7 +15,7 @@ router.get('/upload', function(req, res) {
 
 router.get("/seedb", function(req, res) {
   var retString = "";
-  db.collection('transactions').find().toArray(function(err, result) {
+  req.db.collection('transactions').find().toArray(function(err, result) {
     if (err) throw err;
     result.forEach( function(line){
       // retString += line.email + ",";
@@ -44,7 +42,9 @@ router.post("/upload", function(req, res, next){
     fs.exists(req.files.myFile.path, function(exists) {
       if(exists) {
         res.end("Got your file!");
-        populateDbFromCsv(req.files.myFile.path);
+        req.db.collection('transactions').drop(function(){
+          populateDbFromCsv(req.files.myFile.path);
+        });
       } else {
         res.end("Well, there is no magic for those who don’t believe in it!");
       }

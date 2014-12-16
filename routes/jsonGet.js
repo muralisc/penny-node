@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var mongoskin = require('mongoskin');
-var db = mongoskin.db('mongodb://localhost:27017/penny');
 var async = require('async');
 var dbhelper = require('./dbhelper.js');
 var merge = require('merge');
@@ -38,7 +36,7 @@ router.get('/categories', function(req, res) {
 router.get('/balances', function(req, res) {
   async.parallel({
     from: function(callback){
-      db.collection('transactions').aggregate(
+      req.db.collection('transactions').aggregate(
         [{
             $group: {
                 _id: "$fromCategory",
@@ -48,7 +46,7 @@ router.get('/balances', function(req, res) {
       );
     },
     to  : function(callback){
-      db.collection('transactions').aggregate(
+      req.db.collection('transactions').aggregate(
         [{
             $group: {
                 _id: "$toCategory",
@@ -83,7 +81,7 @@ router.get('/balances', function(req, res) {
 router.get('/expenses', function(req, res) {
   async.parallel({
     from: function(callback){
-      db.collection('transactions').aggregate(
+      req.db.collection('transactions').aggregate(
         [{
             $group: {
                 _id: "$fromCategory",
@@ -93,7 +91,7 @@ router.get('/expenses', function(req, res) {
       );
     },
     to  : function(callback){
-      db.collection('transactions').aggregate(
+      req.db.collection('transactions').aggregate(
         [{
             $group: {
                 _id: "$toCategory",
@@ -152,7 +150,7 @@ router.post('/transactions', function(req, res) {
     delete req.body.query.date;
   }
   console.log(req.body.query);
-  db.collection('transactions').find(req.body.query).limit(req.body.limit).toArray(function(err, result){
+  req.db.collection('transactions').find(req.body.query).limit(req.body.limit).toArray(function(err, result){
     res.json(result);
   });
 });
