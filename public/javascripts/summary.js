@@ -49,6 +49,19 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
     console.log(idsObject);
     console.log($event.currentTarget.getAttribute("value"));
   };
+  $scope.selectAllToggle = function(){
+    if( $scope.selectAll == true){
+      $scope.txnData.forEach(function(txn){
+        txn.checked = true;
+        idsObject[txn._id] = true;
+      });
+    } else{
+      $scope.txnData.forEach(function(txn){
+        txn.checked = false;
+        delete idsObject[txn._id]
+      });
+    }
+  };
 
   $scope.openLowerDate = function($event) {
     $event.preventDefault();

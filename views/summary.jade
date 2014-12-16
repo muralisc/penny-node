@@ -28,8 +28,16 @@ block content
                             i.glyphicon.glyphicon-calendar
                 input(type="number",placeholder="txn per page",class="form-control",ng-model="txnGetPostData.limit",ng-change="getTransactions()")
                 table.table.table-striped
+                    thead
+                        td From Category
+                        td amount
+                        td description
+                        td to category
+                        td date
+                        td Select All 
+                            input(type="checkbox",ng-model="selectAll",ng-click="selectAllToggle()")
                     tr(ng-repeat="txn in txnData")
-                        td {{txn._id}}
+                        // /* td {{txn._id}} */
                         td {{txn.fromCategory}}
                         td {{txn.amount}}
                         td {{txn.description}}

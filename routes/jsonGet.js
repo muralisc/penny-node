@@ -131,7 +131,11 @@ router.post('/transactions', function(req, res) {
   console.log(req.body.query);
   req.body.query.fromCategory = new RegExp(req.body.query.fromCategory);
   req.body.query.toCategory = new RegExp(req.body.query.toCategory);
-  req.body.query.description = new RegExp(req.body.query.description);
+  if( req.body.query.description == '<empty>'){
+    req.body.query.description = '';
+  }
+  else
+    req.body.query.description = new RegExp(req.body.query.description);
   if(Object.keys(req.body.query.date).length >0)
   {
     if(req.body.query.date.$gte != undefined)
