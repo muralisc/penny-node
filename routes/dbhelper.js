@@ -65,14 +65,14 @@ helper.getToCategories = function(callback){
 
 // used with async.map
 helper.updateTxns = function(item,callback){
-  // console.log(JSON.stringify(this));
   var updateObj = { $set: {} };
   if( this.fromCategory.length > 0)
     updateObj.$set['fromCategory'] = this.fromCategory[0];
   if( this.toCategory.length > 0)
     updateObj.$set['toCategory'] = this.toCategory[0];
-  if( this.description.length > 0)
+  if( this.description != undefined)
     updateObj.$set['description'] = this.description;
+  // console.log(JSON.stringify(this));
   db.collection('transactions').updateById(item,updateObj, function(err, result){
       if (err) throw err;
       callback(err,result);

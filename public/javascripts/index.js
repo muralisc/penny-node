@@ -5,7 +5,6 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   $scope.avaibaleCategories = ['loading...','...'];
   $scope.availableDescriptions = ['asd','wer','atds'];
   $scope.availableAmounts = [2,4,234,2345];
-
   $scope.transcation = {};
   $scope.transcation.description = "asd";
   $scope.transcation.date = new Date();
@@ -16,7 +15,6 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   };
 
   var responsePromise = $http.get("/get/categories");
-
   responsePromise.success(function(data, status, headers, config) {
     $scope.avaibaleCategories = data;
   });

@@ -30,9 +30,16 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
     });
   };
   $scope.getBalances= function(){
-    txnResponsePromise = $http.get("/get/balances", $scope.txnGetPostData);
+    txnResponsePromise = $http.get("/get/balances", {});
     txnResponsePromise.success(function(data, status, headers, config) {
       $scope.balances = data;
+      console.log(data);
+    });
+  };
+  $scope.getExpenses= function(){
+    txnResponsePromise = $http.get("/get/expenses", {});
+    txnResponsePromise.success(function(data, status, headers, config) {
+      $scope.expenses = data;
       console.log(data);
     });
   };
@@ -82,10 +89,17 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
     txnResponsePromise.success(function(data, status, headers, config) {
       console.log(data);
       $scope.getTransactions();
+      $scope.getBalances();
+      $scope.getExpenses();
     });
   };
   // Functions ------------------ End
 
   $scope.getTransactions();
   $scope.getBalances();
+  $scope.getExpenses();
+  var responsePromise = $http.get("/get/categories");
+  responsePromise.success(function(data, status, headers, config) {
+    $scope.avaibaleCategories = data;
+  });
 });
