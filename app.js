@@ -6,7 +6,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var mongoskin = require('mongoskin');
-var db = mongoskin.db('mongodb://localhost:27017/penny');
+var connection_string = "";
+if(process.env.OPENSHIFT_MONGODB_DB_URL)
+  connection_string = process.env.OPENSHIFT_MONGODB_DB_URL +
+    process.env.OPENSHIFT_APP_NAME;
+else
+  onnection_string = 'mongodb://localhost:27017/penny';
+var db = mongoskin.db(connection_string);
 
 
 var routes = require('./routes/index');
