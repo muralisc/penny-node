@@ -12,7 +12,7 @@ block content
         input(placeholder="description",type="text",ng-model="transcation.description",typeahead="state for state in availableDescriptions | filter:$viewValue | limitTo:8",class="form-control")
         ui-select(multiple, tagging, tagging-label="false",ng-model="transcation.toCategory",theme="bootstrap",style="width: 320px;")
             ui-select-match(placeholder="Select colors..."){{$item}}
-            ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
+            ui-select-choices(repeat="color in avaibaleToCategories | filter:$select.search")
                 {{color}}
         datepicker(ng-model="transcation.date",show-weeks="true",class="well well-sm")
         div

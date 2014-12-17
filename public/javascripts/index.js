@@ -3,6 +3,7 @@ var app = angular.module('demo', ['ui.bootstrap', 'ui.select']);
 app.controller('DemoCtrl', function($scope, $http, $timeout) {
 
   $scope.avaibaleCategories = ['loading...','...'];
+  $scope.avaibaleToCategories = ['loading...','...'];
   $scope.availableDescriptions = ['asd','wer','atds'];
   $scope.availableAmounts = [2,4,234,2345];
   $scope.transcation = {};
@@ -17,6 +18,10 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   var responsePromise = $http.get("/get/categories");
   responsePromise.success(function(data, status, headers, config) {
     $scope.avaibaleCategories = data;
+  });
+  responsePromise = $http.get("/get/toCategories");
+  responsePromise.success(function(data, status, headers, config) {
+    $scope.avaibaleToCategories = data;
   });
 
 });

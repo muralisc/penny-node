@@ -11,7 +11,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_URL)
   connection_string = process.env.OPENSHIFT_MONGODB_DB_URL +
     process.env.OPENSHIFT_APP_NAME;
 else
-  onnection_string = 'mongodb://localhost:27017/penny';
+  connection_string = 'mongodb://localhost:27017/penny';
 var db = mongoskin.db(connection_string);
 
 

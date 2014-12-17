@@ -16,6 +16,16 @@ router.get('/categories', function(req, res) {
   });
 });
 
+router.get('/toCategories', function(req, res) {
+  async.parallel([
+    dbhelper.getToCategories.bind(req),
+    // comma above because this is an array
+  ],
+  function(err, results){
+    res.json(results[0]);
+  });
+});
+
 /*
  *db.bands.aggregate(
  *[
