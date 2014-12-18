@@ -27,6 +27,7 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
     $scope.txnEditPostData.update.description = "";
     $scope.txnEditPostData.update.fromCategory= [];
     $scope.txnEditPostData.update.toCategory= [];
+    $scope.selectAll = false;
   }
 
 
@@ -91,6 +92,18 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
 
     $scope.openedUpperDate = !$scope.openedUpperDate;
   };
+  $scope.getFromCategories = function(){
+    fcResponsePromise = $http.get("/get/categories");
+    fcResponsePromise.success(function(data, status, headers, config) {
+      $scope.avaibaleCategories = data;
+    });
+  }
+  $scope.getToCategories = function(){
+    tcResponsePromise = $http.get("/get/toCategories");
+    tcResponsePromise.success(function(data, status, headers, config) {
+      $scope.avaibaleToCategories = data;
+    });
+  }
   $scope.onEditClick = function(){
     $scope.txnEditPostData.ids = Object.keys(idsObject);
     console.log(JSON.stringify($scope.txnEditPostData));
@@ -101,6 +114,8 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
       $scope.getBalances();
       $scope.getExpenses();
       $scope.clearEditVariables();
+      $scope.getFromCategories();
+      $scope.getToCategories();
     });
   };
   // Functions ------------------ End
@@ -108,13 +123,7 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   $scope.getTransactions();
   $scope.getBalances();
   $scope.getExpenses();
+  $scope.getFromCategories();
+  $scope.getToCategories();
 
-  fcResponsePromise = $http.get("/get/categories");
-  fcResponsePromise.success(function(data, status, headers, config) {
-    $scope.avaibaleCategories = data;
-  });
-  tcResponsePromise = $http.get("/get/toCategories");
-  tcResponsePromise.success(function(data, status, headers, config) {
-    $scope.avaibaleToCategories = data;
-  });
 });

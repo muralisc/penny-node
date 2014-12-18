@@ -73,7 +73,7 @@ block content
                         td asd
                             ui-select(multiple, tagging, tagging-label="false",ng-model="txnEditPostData.update.toCategory",theme="bootstrap")
                                 ui-select-match(placeholder="<TAB>new to category"){{$item}}
-                                ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
+                                ui-select-choices(repeat="color in avaibaleToCategories | filter:$select.search")
                                     {{color}}
                         td asd
                         td asd

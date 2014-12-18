@@ -71,7 +71,7 @@ helper.updateTxns = function(item,callback){
     updateObj.$set['toCategory'] = this.body.update.toCategory[0];
   if( this.body.update.description != undefined)
     updateObj.$set['description'] = this.body.update.description;
-  // console.log(JSON.stringify(this));
+  console.log("UPDATE OBJECT:"+JSON.stringify(updateObj));
   this.db.collection('transactions').updateById(item,updateObj, function(err, result){
       if (err) throw err;
       callback(err,result);
