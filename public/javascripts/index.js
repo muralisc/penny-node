@@ -9,18 +9,31 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   $scope.transcation = {};
   $scope.transcation.description = "asd";
   $scope.transcation.date = new Date();
+  var txnResponsePromise;
+  var fcResponsePromise;
+  var tcResponsePromise;
+
+  $scope.resetInputs = function(){
+    $scope.transcation.description = "";
+    $scope.transcation.fromCategory = [];
+    $scope.transcation.toCategory = "";
+  }
 
   $scope.onSubmit = function(){
-    var responsePromise = $http.post("/set/transaction", $scope.transcation);
-    console.log("asdfA");
+    txnResponsePromise = $http.post("/set/transaction", $scope.transcation);
+    console.log("sent txn set request");
+    txnResponsePromise.success(function(data, status, headers, config) {
+      console.log(data);
+      $scope.resetInputs();
+    });
   };
 
-  var responsePromise = $http.get("/get/categories");
-  responsePromise.success(function(data, status, headers, config) {
+  fcResponsePromise = $http.get("/get/categories");
+  fcResponsePromise.success(function(data, status, headers, config) {
     $scope.avaibaleCategories = data;
   });
-  responsePromise = $http.get("/get/toCategories");
-  responsePromise.success(function(data, status, headers, config) {
+  tcResponsePromise = $http.get("/get/toCategories");
+  tcResponsePromise.success(function(data, status, headers, config) {
     $scope.avaibaleToCategories = data;
   });
 

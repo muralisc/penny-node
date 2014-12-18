@@ -16,6 +16,7 @@ var dbhelper = require('./dbhelper.js');
  */
 router.post("/transaction",function(req,res, next){
   dbhelper.setTransaction(req.body,req.db);
+  res.json("done");
 });
 
 

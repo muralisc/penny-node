@@ -1,5 +1,4 @@
 var mongoskin = require('mongoskin');
-var db = mongoskin.db('mongodb://localhost:27017/penny');
 var merge = require('merge');
 
 var helper = {};
