@@ -18,7 +18,16 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   $scope.txnEditPostData.ids = [];
   $scope.txnEditPostData.update = {};
   var txnResponsePromise;
+  var fcResponsePromise;
+  var tcResponsePromise;
   $scope.avaibaleCategories = ['loading...','...'];
+  $scope.avaibaleToCategories = ['loading...','...'];
+
+  $scope.clearEditVariables = function(){
+    $scope.txnEditPostData.update.description = "";
+    $scope.txnEditPostData.update.fromCategory= [];
+    $scope.txnEditPostData.update.toCategory= [];
+  }
 
 
   // Functions ------------------ Begin
@@ -91,6 +100,7 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
       $scope.getTransactions();
       $scope.getBalances();
       $scope.getExpenses();
+      $scope.clearEditVariables();
     });
   };
   // Functions ------------------ End
@@ -98,8 +108,13 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   $scope.getTransactions();
   $scope.getBalances();
   $scope.getExpenses();
-  var responsePromise = $http.get("/get/categories");
-  responsePromise.success(function(data, status, headers, config) {
+
+  fcResponsePromise = $http.get("/get/categories");
+  fcResponsePromise.success(function(data, status, headers, config) {
     $scope.avaibaleCategories = data;
+  });
+  tcResponsePromise = $http.get("/get/toCategories");
+  tcResponsePromise.success(function(data, status, headers, config) {
+    $scope.avaibaleToCategories = data;
   });
 });
