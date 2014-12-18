@@ -49,7 +49,7 @@ block content
                         td 
                             div Select All 
                             input(type="checkbox",ng-model="selectAll",ng-click="selectAllToggle()")
-                        td
+                        td.col-md-2
                             input(type="number",placeholder="txn per page",class="form-control",ng-model="txnGetPostData.limit",ng-change="getTransactions()")
                     tr(ng-repeat="txn in txnData")
                         // /* td {{txn._id}} */
@@ -64,7 +64,7 @@ block content
                     thead
                         td edit
                             ui-select(multiple, tagging, tagging-label="false",ng-model="txnEditPostData.update.fromCategory",theme="bootstrap")
-                                ui-select-match(placeholder="new from category"){{$item}}
+                                ui-select-match(placeholder="<TAB>new from category"){{$item}}
                                 ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
                                     {{color}}
                         td asd
@@ -72,10 +72,10 @@ block content
                             input(type="text",placeholder="description",class="form-control",ng-model="txnEditPostData.update.description")
                         td asd
                             ui-select(multiple, tagging, tagging-label="false",ng-model="txnEditPostData.update.toCategory",theme="bootstrap")
-                                ui-select-match(placeholder="new to category"){{$item}}
+                                ui-select-match(placeholder="<TAB>new to category"){{$item}}
                                 ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
                                     {{color}}
                         td asd
                         td asd
                         td asd
-                            button.btn.btn-primary.btn-block(type="submit", ng-click="onEditClick()") Edit
+                            button.btn.btn-primary.btn-block.form-control(type="submit", ng-click="onEditClick()") Edit
