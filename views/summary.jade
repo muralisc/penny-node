@@ -16,38 +16,41 @@ block content
                         td.text-right {{balance | number:2}}
         div.row
             div.col-md-6
-                input(type="text",placeholder="fromCategory Search",class="form-control",ng-model="txnGetPostData.query.fromCategory",ng-change="getTransactions()")
-                div
-                    input(style="width:320px;",type="number",placeholder="amount lower limit",ng-model="txnGetPostData.query.amount.$gte",ng-change="getTransactions()")
-                    span <= amount <=
-                    input(style="width:320px;",type="number",placeholder="amount upper limit",ng-model="txnGetPostData.query.amount.$lte",ng-change="getTransactions()")
-                input(type="text",placeholder="description Search regex",class="form-control",ng-model="txnGetPostData.query.description",ng-change="getTransactions()")
-                input(type="text",placeholder="toCategory Search",class="form-control",ng-model="txnGetPostData.query.toCategory",ng-change="getTransactions()")
-                div
-                    div.col-md-3
-                        p.input-group
-                            input(type="text",placeholder="date lower lim",class="form-control",datepicker-popup="dd-MMMM-yyyy",ng-model="txnGetPostData.query.date.$gte",is-open="openedLowerDate",ng-required="true",ng-change="getTransactions()")
-                            span.input-group-btn
-                                button(type="button",class="btn btn-default",ng-click="openLowerDate($event)")
-                                    i.glyphicon.glyphicon-calendar
-                    div.col-md-2
-                        p <= date <= 
-                    div.col-md-3
-                        p.input-group
-                            input(type="text",placeholder="date upper lim",class="form-control",datepicker-popup="dd-MMMM-yyyy",ng-model="txnGetPostData.query.date.$lte",is-open="openedUpperDate",ng-required="true",ng-change="getTransactions()")
-                            span.input-group-btn
-                                button(type="button",class="btn btn-default",ng-click="openUpperDate($event)")
-                                    i.glyphicon.glyphicon-calendar
-                input(type="number",placeholder="txn per page",class="form-control",ng-model="txnGetPostData.limit",ng-change="getTransactions()")
                 table.table.table-striped
                     thead
-                        td From Category
-                        td amount
-                        td description
-                        td to category
-                        td date
-                        td Select All 
+                        td 
+                            span From Category
+                            input(type="text",placeholder="fromCategory Search",class="form-control",ng-model="txnGetPostData.query.fromCategory",ng-change="getTransactions()")
+                        td.col-md-3
+                            span amount
+                            div
+                                input(type="number",placeholder="amount lower limit",ng-model="txnGetPostData.query.amount.$gte",ng-change="getTransactions()")
+                                div <= amt <=
+                                input(type="number",placeholder="amount upper limit",ng-model="txnGetPostData.query.amount.$lte",ng-change="getTransactions()")
+                        td 
+                            span description
+                            input(type="text",placeholder="description Search regex",class="form-control",ng-model="txnGetPostData.query.description",ng-change="getTransactions()")
+                        td 
+                            span to category
+                            input(type="text",placeholder="toCategory Search",class="form-control",ng-model="txnGetPostData.query.toCategory",ng-change="getTransactions()")
+                        td 
+                            span date
+                            p.input-group
+                                input(type="text",placeholder="date lower lim",class="form-control",datepicker-popup="dd-MMMM-yyyy",ng-model="txnGetPostData.query.date.$gte",is-open="openedLowerDate",ng-required="true",ng-change="getTransactions()")
+                                span.input-group-btn
+                                    button(type="button",class="btn btn-default",ng-click="openLowerDate($event)")
+                                        i.glyphicon.glyphicon-calendar
+                            span <= date <= 
+                            p.input-group
+                                input(type="text",placeholder="date upper lim",class="form-control",datepicker-popup="dd-MMMM-yyyy",ng-model="txnGetPostData.query.date.$lte",is-open="openedUpperDate",ng-required="true",ng-change="getTransactions()")
+                                span.input-group-btn
+                                    button(type="button",class="btn btn-default",ng-click="openUpperDate($event)")
+                                        i.glyphicon.glyphicon-calendar
+                        td 
+                            div Select All 
                             input(type="checkbox",ng-model="selectAll",ng-click="selectAllToggle()")
+                        td
+                            input(type="number",placeholder="txn per page",class="form-control",ng-model="txnGetPostData.limit",ng-change="getTransactions()")
                     tr(ng-repeat="txn in txnData")
                         // /* td {{txn._id}} */
                         td {{txn.fromCategory}}
@@ -57,17 +60,22 @@ block content
                         td {{txn.date}}
                         td
                             input(type="checkbox",ng-model="txn.checked",ng-click="onCheck($event)",value="{{txn._id}}")
-        div.row
-            div.col-md-6
-                p batch edit:
-                ui-select(multiple, tagging, tagging-label="false",ng-model="txnEditPostData.update.fromCategory",theme="bootstrap")
-                    ui-select-match(placeholder="new from category"){{$item}}
-                    ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
-                        {{color}}
-                input(type="text",placeholder="description",class="form-control",ng-model="txnEditPostData.update.description")
-                ui-select(multiple, tagging, tagging-label="false",ng-model="txnEditPostData.update.toCategory",theme="bootstrap")
-                    ui-select-match(placeholder="new to category"){{$item}}
-                    ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
-                        {{color}}
-                div
-                    button.btn.btn-primary.btn-block(type="submit", ng-click="onEditClick()") Edit
+                        td
+                    thead
+                        td edit
+                            ui-select(multiple, tagging, tagging-label="false",ng-model="txnEditPostData.update.fromCategory",theme="bootstrap")
+                                ui-select-match(placeholder="new from category"){{$item}}
+                                ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
+                                    {{color}}
+                        td asd
+                        td edit amount
+                            input(type="text",placeholder="description",class="form-control",ng-model="txnEditPostData.update.description")
+                        td asd
+                            ui-select(multiple, tagging, tagging-label="false",ng-model="txnEditPostData.update.toCategory",theme="bootstrap")
+                                ui-select-match(placeholder="new to category"){{$item}}
+                                ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
+                                    {{color}}
+                        td asd
+                        td asd
+                        td asd
+                            button.btn.btn-primary.btn-block(type="submit", ng-click="onEditClick()") Edit
