@@ -43,7 +43,7 @@ router.post("/upload", function(req, res, next){
       if(exists) {
         res.end("Got your file!");
         req.db.collection('transactions').drop(function(){
-          populateDbFromCsv(req.files.myFile.path);
+          populateDbFromCsv(req.files.myFile.path, req.db);
         });
       } else {
         res.end("Well, there is no magic for those who don’t believe in it!");
@@ -52,7 +52,7 @@ router.post("/upload", function(req, res, next){
   }
 });
 
-function populateDbFromCsv(filepath){
+function populateDbFromCsv(filepath, db){
   fs.readFile(filepath, {encoding: "utf8"}, function (err, data) {
     if (err) throw err;
     categories = {};
@@ -61,12 +61,12 @@ function populateDbFromCsv(filepath){
         // helper function to insert he database
         dbhelper.setTransaction({
           // email:        line[0],
-          fromCategory: [ line[2] ],
-          amount:       parseFloat(line[1]),
-          description:  line[3],
-          toCategory:   [ line[4] ],
-          date:         new Date(line[5])
-        });
+          fromCategory: [ line[1] ],
+          amount:       parseFloat(line[0]),
+          description:  line[2],
+          toCategory:   [ line[3] ],
+          date:         new Date(line[4])
+        }, db);
       });
     });
   });
