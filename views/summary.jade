@@ -4,6 +4,27 @@ block content
     script(src="/javascripts/summary.js")
     div.container-fluid
         div.row
+            //form(action="/categories", method="post",style="width:320px;",ng-submit="onSubmit()")
+            div(style="width:320px;")
+                ui-select(multiple, tagging, tagging-label="false",ng-model="newTransaction.fromCategory",theme="bootstrap",style="width: 320px;")
+                    ui-select-match(placeholder="Select colors..."){{$item}}
+                    ui-select-choices(repeat="color in avaibaleCategories | filter:$select.search")
+                        {{color}}
+                input(placeholder="amount",type="number",ng-model="newTransaction.amount",typeahead="state for state in availableAmounts | filter:$viewValue | limitTo:8",class="form-control")
+                input(placeholder="description",type="text",ng-model="newTransaction.description",typeahead="state for state in availableDescriptions | filter:$viewValue | limitTo:8",class="form-control")
+                ui-select(multiple, tagging, tagging-label="false",ng-model="newTransaction.toCategory",theme="bootstrap",style="width: 320px;")
+                    ui-select-match(placeholder="Select colors..."){{$item}}
+                    ui-select-choices(repeat="color in avaibaleToCategories | filter:$select.search")
+                        {{color}}
+                datepicker(ng-model="newTransaction.date",show-weeks="true",class="well well-sm")
+                div
+                    button.btn.btn-primary.btn-block(type="submit", ng-click="onSubmit()") Submit
+                p from: {{newTransaction.fromCategory}}
+                p amount: {{newTransaction.amount}}
+                p description: {{newTransaction.description}}
+                p to: {{newTransaction.toCategory}}
+                p date is: {{ newTransaction.date | date:'fullDate' }}
+        div.row
             div.col-md-2
                 table.table.table-striped
                     tr(ng-repeat="(category,balance) in balances")

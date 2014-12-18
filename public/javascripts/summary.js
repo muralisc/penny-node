@@ -23,6 +23,34 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
   $scope.avaibaleCategories = ['loading...','...'];
   $scope.avaibaleToCategories = ['loading...','...'];
 
+  // code for submit --------------------BEGIN---------------------
+  $scope.newTransaction = {};
+  $scope.newTransaction.description = "asd";
+  $scope.newTransaction.date = new Date();
+
+  $scope.resetInputs = function(){
+    $scope.newTransaction.description = "";
+    $scope.newTransaction.amount = "";
+    $scope.newTransaction.fromCategory = [];
+    $scope.newTransaction.toCategory = "";
+  }
+
+  $scope.onSubmit = function(){
+    txnResponsePromise = $http.post("/set/transaction", $scope.newTransaction);
+    console.log("sent txn set request");
+    txnResponsePromise.success(function(data, status, headers, config) {
+      console.log(data);
+      $scope.getTransactions();
+      $scope.getBalances();
+      $scope.getExpenses();
+      $scope.clearEditVariables();
+      $scope.getFromCategories();
+      $scope.getToCategories();
+      $scope.resetInputs();
+    });
+  };
+  //code for submit new txn -----------------END---------------
+
   $scope.clearEditVariables = function(){
     $scope.txnEditPostData.update.description = "";
     $scope.txnEditPostData.update.fromCategory= [];
@@ -116,6 +144,7 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
       $scope.clearEditVariables();
       $scope.getFromCategories();
       $scope.getToCategories();
+      $scope.resetInputs();
     });
   };
   // Functions ------------------ End
