@@ -1,10 +1,11 @@
 extends layout
 
 block content
-    script(src="/javascripts/summary.js")
+    script(src="/javascripts/index.js")
     div.container-fluid
         div.row
             div.col-md-3
+                a(href="http://www.quora.com/I-earn-52000-%E2%82%B9-per-month-What-are-the-best-ways-to-increase-my-assets-and-decrease-my-liabilities") quora advise
                 div(style="width:320px;")
                     ui-select(multiple, tagging, tagging-label="false",ng-model="newTransaction.fromCategory",theme="bootstrap",style="width: 320px;")
                         ui-select-match(placeholder="Select colors..."){{$item}}
