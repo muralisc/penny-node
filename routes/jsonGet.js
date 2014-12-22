@@ -136,14 +136,18 @@ router.get('/expenses', function(req, res) {
 
 //get transaction based on query
 router.post('/transactions', function(req, res) {
-  console.log(req.body.query);
-  req.body.query.fromCategory = new RegExp(req.body.query.fromCategory,'i');
-  req.body.query.toCategory = new RegExp(req.body.query.toCategory,'i');
-  if( req.body.query.description == '<empty>'){
-    req.body.query.description = '';
+  var getEmptyOrRegExp = function( data ){
+    if( data == '<empty>'){
+      return '';
+    }
+    else
+      return new RegExp(req.body.query.description,'i');
   }
-  else
-    req.body.query.description = new RegExp(req.body.query.description,'i');
+
+  console.log(req.body.query);
+  req.body.query.fromCategory = getEmptyOrRegExp(req.body.query.fromCategory);
+  req.body.query.toCategory   = getEmptyOrRegExp(req.body.query.toCategory);
+  req.body.query.description  = getEmptyOrRegExp(req.body.query.description);
   if(Object.keys(req.body.query.date).length >0)
   {
     if(req.body.query.date.$gte != undefined)
