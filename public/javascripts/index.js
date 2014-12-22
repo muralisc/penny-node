@@ -56,6 +56,8 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
     $scope.txnEditPostData.update.fromCategory= [];
     $scope.txnEditPostData.update.toCategory= [];
     $scope.selectAll = false;
+    // uncheck all the checked transactions
+    $scope.selectAllToggle();
   }
 
 

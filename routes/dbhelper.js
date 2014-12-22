@@ -69,11 +69,12 @@ helper.updateTxns = function(item,callback){
     updateObj.$set['fromCategory'] = this.body.update.fromCategory[0];
   if( this.body.update.toCategory.length > 0)
     updateObj.$set['toCategory'] = this.body.update.toCategory[0];
-  if( this.body.update.description != undefined)
+  if( this.body.update.description != "")
     updateObj.$set['description'] = this.body.update.description;
   console.log("UPDATE OBJECT:"+JSON.stringify(updateObj));
-  this.db.collection('transactions').updateById(item,updateObj, function(err, result){
+  this.db.collection('transactions').updateById(item,updateObj, function(err, result,res){
       if (err) throw err;
+      console.log(JSON.stringify(res));
       callback(err,result);
   });
 }

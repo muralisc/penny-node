@@ -141,7 +141,7 @@ router.post('/transactions', function(req, res) {
       return '';
     }
     else
-      return new RegExp(req.body.query.description,'i');
+      return new RegExp(data,'i');
   }
 
   console.log(req.body.query);
