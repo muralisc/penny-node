@@ -160,7 +160,7 @@ router.post('/transactions', function(req, res) {
     delete req.body.query.date;
   }
   console.log(req.body.query);
-  req.db.collection('transactions').find(req.body.query).limit(req.body.limit).toArray(function(err, result){
+  req.db.collection('transactions').find(req.body.query).sort({date:1}).limit(req.body.limit).toArray(function(err, result){
     res.json(result);
   });
 });

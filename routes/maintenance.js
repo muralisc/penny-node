@@ -15,7 +15,7 @@ router.get('/upload', function(req, res) {
 
 router.get("/seedb", function(req, res) {
   var retString = "";
-  req.db.collection('transactions').find().toArray(function(err, result) {
+  req.db.collection('transactions').find().sort({date: -1}).toArray(function(err, result) {
     if (err) throw err;
     result.forEach( function(line){
       // retString += line.email + ",";
