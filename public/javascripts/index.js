@@ -67,17 +67,19 @@ app.controller('DemoCtrl', function($scope, $http, $timeout) {
     txnResponsePromise.success(function(data, status, headers, config) {
       $scope.txnData = data;
       console.log(data);
+      $scope.getBalances();
+      $scope.getExpenses();
     });
   };
   $scope.getBalances= function(){
-    txnResponsePromise = $http.get("/get/balances", {});
+    txnResponsePromise = $http.post("/get/balances", $scope.txnGetPostData);
     txnResponsePromise.success(function(data, status, headers, config) {
       $scope.balances = data;
       console.log(data);
     });
   };
   $scope.getExpenses= function(){
-    txnResponsePromise = $http.get("/get/expenses", {});
+    txnResponsePromise = $http.post("/get/expenses", $scope.txnGetPostData);
     txnResponsePromise.success(function(data, status, headers, config) {
       $scope.expenses = data;
       console.log(data);

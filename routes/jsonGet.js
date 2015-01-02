@@ -43,11 +43,28 @@ router.get('/toCategories', function(req, res) {
  *)
  *
  */
-router.get('/balances', function(req, res) {
+router.post('/balances', function(req, res) {
+  var startDate = new Date(0);
+  var endDate = new Date();
+  if(Object.keys(req.body.query.date).length >0)
+  {
+    if(req.body.query.date.$gte != undefined)
+      startDate = new Date(req.body.query.date.$gte);
+    else
+      startDate = new Date(0);
+    if(req.body.query.date.$lte != undefined)
+      endDate = new Date(req.body.query.date.$lte);
+    else
+      endDate = new Date();
+  }
   async.parallel({
     from: function(callback){
       req.db.collection('transactions').aggregate(
-        [{
+        [
+        { $match: { 
+                    date : { $gte: startDate, $lte: endDate}
+                  }
+        }, {
             $group: {
                 _id: "$fromCategory",
                 balances: {$sum: "$amount"}
@@ -57,7 +74,11 @@ router.get('/balances', function(req, res) {
     },
     to  : function(callback){
       req.db.collection('transactions').aggregate(
-        [{
+        [
+        { $match: { 
+                    date : { $gte: startDate, $lte: endDate}
+                  }
+        }, {
             $group: {
                 _id: "$toCategory",
                 balances: {$sum: "$amount"}
@@ -88,11 +109,28 @@ router.get('/balances', function(req, res) {
   });
 });
 
-router.get('/expenses', function(req, res) {
+router.post('/expenses', function(req, res) {
+  var startDate = new Date(0);
+  var endDate = new Date();
+  if(Object.keys(req.body.query.date).length >0)
+  {
+    if(req.body.query.date.$gte != undefined)
+      startDate = new Date(req.body.query.date.$gte);
+    else
+      startDate = new Date(0);
+    if(req.body.query.date.$lte != undefined)
+      endDate = new Date(req.body.query.date.$lte);
+    else
+      endDate = new Date();
+  }
   async.parallel({
     from: function(callback){
       req.db.collection('transactions').aggregate(
-        [{
+        [
+        { $match: { 
+                    date : { $gte: startDate, $lte: endDate}
+                  }
+        }, {
             $group: {
                 _id: "$fromCategory",
                 balances: {$sum: "$amount"}
@@ -102,7 +140,11 @@ router.get('/expenses', function(req, res) {
     },
     to  : function(callback){
       req.db.collection('transactions').aggregate(
-        [{
+        [
+        { $match: { 
+                    date : { $gte: startDate, $lte: endDate}
+                  }
+        }, {
             $group: {
                 _id: "$toCategory",
                 balances: {$sum: "$amount"}
